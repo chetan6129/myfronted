@@ -1,29 +1,48 @@
+import React from "react";
+//import './Counter.css';
+class Counter extends React.Component{
+    constructor(){
+        super();
+        this.state={
+            count:0
+        }
+    }
 
-import React, { useState } from 'react';
+    increaseCounter(){
+        this.setState({
+            count:this.state.count+1
+        })
+    }
+    decreaseCounter(){
+        this.setState({
+            count:this.state.count-1
+        })
+    }
 
-function BioForm() {
-  const [bio, setBio] = useState('');
-  const [bioUppercase, setBioUppercase] = useState('');
+    changeInputValue(value){
+        this.setState({
+            count:value
+        })
+    }
 
-  function handleChange(event) {
-    setBio(event.target.value);
-  }
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    setBioUppercase(bio.toUpperCase());
-  }
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        enter the data:
-        <textarea value={bio} onChange={handleChange} />
-      </label>
-      <button type="press this">Convert to Uppercase</button>
-      <p>{bioUppercase}</p>
-    </form>
-  );
+    render(){
+        return <div className="count-component">
+            <p> Count- {this.state.count}</p>
+            <input type="number" value={this.state.count}
+            onChange={(event)=>this.changeInputValue(event.target.value)}
+            />
+            <button onClick={
+                ()=>{
+                    this.increaseCounter();
+                }
+            }> Increase</button>
+            <button onClick={
+                ()=>{
+                    this.decreaseCounter();
+                }
+            } > Decrease</button>
+        </div>
+    }
 }
 
-export default BioForm;
+export default Counter;
